@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fiveDayForecast">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/five_head"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:text="By City Name"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_below="@id/five_head"
+        android:layout_marginTop="20dp"
+        android:id="@+id/five_day_forecast_by_city"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:text="By Coordinates"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:id="@+id/five_day_forecast_by_coordinates"
+        android:textSize="30sp"
+        android:layout_below="@id/five_day_forecast_by_city"
+        android:layout_marginTop="50dp"/>
+
+
+
+
+
+</RelativeLayout>

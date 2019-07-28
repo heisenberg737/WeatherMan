@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/current_weather"
+            android:title="Current Weather"/>
+        <item
+            android:id="@+id/uv_index"
+            android:title="UV Index"/>
+        <item
+            android:id="@+id/air_pollution"
+            android:title="Air Pollution"/>
+        <item
+            android:id="@+id/five_day_forecast"
+            android:title="5 Days/3 Hour Forecast"/>
+    </group>
+
+</menu>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".currentWeather">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/current_weather_head"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:id="@+id/by_city_name"
+        android:layout_below="@+id/current_weather_head"
+        android:layout_marginTop="20dp"
+        android:text="By City Name"
+        android:textSize="30sp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:id="@+id/by_lat_lon"
+        android:layout_below="@+id/by_city_name"
+        android:layout_marginTop="50dp"
+        android:text="By Latitude and Longitude"
+        android:textSize="30sp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"/>
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fiveDayForecastByCoord">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:id="@+id/five_day_forecast_coord_head">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/five_day_forecast_coord_head"
+        android:id="@+id/five_day_forecast_by_coord_entry"
+        android:layout_marginTop="10dp">
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Latititde"
+            android:id="@+id/five_day_forecast_by_coord_latitude_entry"
+            android:layout_marginStart="5dp"
+            android:inputType="numberDecimal|numberSigned"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:hint="Longitude"
+            android:id="@+id/five_day_forecast_by_coord_longitude_entry"
+            android:inputType="numberDecimal|numberSigned"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Show"
+            android:background="@android:color/holo_orange_dark"
+            android:textColor="@android:color/white"
+            android:id="@+id/five_day_forecast_by_coord_show"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        android:id="@+id/getCoordinates"
+        android:text="Get Location"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/five_day_forecast_by_coord_entry"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/five_day_forecast_by_coord_city"
+        android:orientation="horizontal"
+        android:layout_below="@id/getCoordinates"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@android:color/background_dark"
+            android:text="City Name : "/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@android:color/background_dark"
+            android:id="@+id/five_day_forecast_by_coord_city_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/five_day_forecast_by_coord_city"
+        android:id="@+id/five_day_forecast_by_coord_country">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@android:color/background_dark"
+            android:text="Country Name : "/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@android:color/background_dark"
+            android:id="@+id/five_day_forecast_by_coord_country_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/five_day_forecast_by_coord_country"
+        android:id="@+id/five_day_forecast_by_coord_lat">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@android:color/background_dark"
+            android:text="Latitude : "/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="@android:color/background_dark"
+            android:id="@+id/five_day_forecast_by_coord_latitude"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/five_day_forecast_by_coord_lat"
+        android:id="@+id/five_day_forecast_by_coord_lon">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/background_dark"
+            android:text="Longitude : "/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp"
+            android:textColor="@android:color/background_dark"
+            android:id="@+id/five_day_forecast_by_coord_longitude"/>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/five_day_forecast_by_coord_lon">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/five_day_forecast_list_headings">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_dark"
+                    android:text="Temperature"
+                    android:layout_marginStart="5dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_dark"
+                    android:text="Pressure"
+                    android:layout_marginStart="5dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/background_dark"
+                    android:text="Humidity"
+                    android:layout_marginStart="5dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/background_dark"
+                    android:text="Description"
+                    android:layout_marginStart="5dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/background_dark"
+                    android:text="WindSpeed"
+                    android:layout_marginStart="5dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/background_dark"
+                    android:text="Date and Time"
+                    android:layout_marginStart="5dp"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/five_day_forecast_by_coord_list">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+
+</RelativeLayout>
