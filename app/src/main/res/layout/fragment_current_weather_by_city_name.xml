@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".currentWeatherByCityName">
+    tools:context=".CurrentWeatherByCityNameFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,6 +12,15 @@
         android:id="@+id/current_weather_city_head">
     </LinearLayout>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_weather"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:indeterminate="true"
+        style="@android:style/Widget.Holo.ProgressBar"
+        android:id="@+id/current_weather_by_city_pb"/>
 
     <TextView
         android:layout_width="match_parent"

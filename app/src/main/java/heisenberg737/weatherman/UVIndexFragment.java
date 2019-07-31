@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,16 +37,19 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UVIndex extends Fragment implements View.OnClickListener{
+public class UVIndexFragment extends Fragment implements View.OnClickListener{
     TextView latitude,longitude,value,date_iso;
     EditText lat,lon;
     Button getLocation,showUVIndex;
     String lati,longi;
     FusedLocationProviderClient fusedLocationProviderClient;
     int LOCATION_PERMISSION_INDEX=1;
+    int progressStatus=1;
+    ProgressBar progressBar;
+    Handler handler=new Handler();
 
 
-    public UVIndex() {
+    public UVIndexFragment() {
         // Required empty public constructor
     }
 
@@ -62,6 +67,9 @@ public class UVIndex extends Fragment implements View.OnClickListener{
         longitude=view.findViewById(R.id.uv_index_longitude);
         value=view.findViewById(R.id.uv_index);
         date_iso=view.findViewById(R.id.uv_index_date_iso);
+
+        progressBar=view.findViewById(R.id.uv_index_pb);
+
         getLocation.setOnClickListener(this);
         showUVIndex.setOnClickListener(this);
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(getActivity());
@@ -81,6 +89,33 @@ public class UVIndex extends Fragment implements View.OnClickListener{
                 lon.setError("Enter a valid longitude");
             else
             {
+                progressStatus=0;
+                progressBar.setVisibility(View.VISIBLE);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while(progressStatus<100)
+                            progressStatus+=1;
+                        try {
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                progressBar.setProgress(progressStatus);
+                                if(progressStatus==100)
+                                    progressBar.setVisibility(View.GONE);
+
+                            }
+                        });
+                    }
+                }).start();
+
                 getUVIndex(lati,longi);
             }
         }
@@ -95,6 +130,34 @@ public class UVIndex extends Fragment implements View.OnClickListener{
                            {
                                lati= String.valueOf(location.getLatitude());
                                longi=String.valueOf(location.getLongitude());
+
+                               progressStatus=0;
+                               progressBar.setVisibility(View.VISIBLE);
+
+                               new Thread(new Runnable() {
+                                   @Override
+                                   public void run() {
+                                       while(progressStatus<100)
+                                           progressStatus+=1;
+                                       try {
+                                           Thread.sleep(20);
+                                       } catch (InterruptedException e) {
+                                           e.printStackTrace();
+                                       }
+
+                                       handler.post(new Runnable() {
+                                           @Override
+                                           public void run() {
+
+                                               progressBar.setProgress(progressStatus);
+                                               if(progressStatus==100)
+                                                   progressBar.setVisibility(View.GONE);
+
+                                           }
+                                       });
+                                   }
+                               }).start();
+
                                getUVIndex(lati,longi);
 
                            }

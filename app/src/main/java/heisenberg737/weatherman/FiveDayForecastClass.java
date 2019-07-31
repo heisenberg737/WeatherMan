@@ -1,8 +1,8 @@
 package heisenberg737.weatherman;
 
-public class fiveDayForecastClass {
+public class FiveDayForecastClass {
     String temperature,pressure,humidity,description,windspeed,datetime;
-    public fiveDayForecastClass(String temperature,String pressure,String humidity,String description,String windspeed,String datetime)
+    public FiveDayForecastClass(String temperature, String pressure, String humidity, String description, String windspeed, String datetime)
     {
         this.description=description;
         this.temperature=temperature;

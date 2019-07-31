@@ -1,5 +1,9 @@
 package heisenberg737.weatherman;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,13 +16,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity  {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    boolean doubleBacktoExitPressedOnce=false;
 
     FragmentManager fragmentManager,fragmentManager1;
+
+    @Override
+    public void onBackPressed() {
+        if(doubleBacktoExitPressedOnce){
+            super.onBackPressed();
+        }
+
+        this.doubleBacktoExitPressedOnce=true;
+        Toast.makeText(this,"Press Back Again to Exit!",Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBacktoExitPressedOnce=false;
+            }
+        },2000);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +70,25 @@ public class MainActivity extends AppCompatActivity  {
         }
 
         FragmentTransaction fragmentTransaction1=fragmentManager1.beginTransaction();
-        fragmentTransaction1.replace(R.id.main_content,new introFragment(),null).addToBackStack(null).commit();
+        fragmentTransaction1.replace(R.id.main_content,new IntroFragment(),null).addToBackStack(null).commit();
+
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,15);
+        calendar.set(Calendar.MINUTE,53);
+        calendar.set(Calendar.SECOND,0);
+
+        Intent intent=new Intent(getApplicationContext(),ForecastReciever.class);
+
+        PendingIntent pendingIntent=PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_FIFTEEN_MINUTES,pendingIntent);
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment fragment=new introFragment();
+                Fragment fragment=new IntroFragment();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
 
                 switch (menuItem.getItemId())
@@ -57,7 +96,7 @@ public class MainActivity extends AppCompatActivity  {
                     case R.id.current_weather:
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
-                        fragment=new currentWeather();
+                        fragment=new CurrentWeatherFragment();
                         toolbar.setTitle("Current Weather");
                         getSupportFragmentManager().popBackStack();
                         break;
@@ -65,21 +104,21 @@ public class MainActivity extends AppCompatActivity  {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         toolbar.setTitle("Air Pollution");
-                        fragment=new AirPollution();
+                        fragment=new AirPollutionFragment();
                         getSupportFragmentManager().popBackStack();
                         break;
                     case R.id.uv_index:
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         toolbar.setTitle("UV Index");
-                        fragment=new UVIndex();
+                        fragment=new UVIndexFragment();
                         getSupportFragmentManager().popBackStack();
                         break;
                     case R.id.five_day_forecast:
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
-                        toolbar.setTitle("UV Index");
-                        fragment=new fiveDayForecast();
+                        toolbar.setTitle("5 days/3 hour Forecast ");
+                        fragment=new FiveDayForecastFragment();
                         getSupportFragmentManager().popBackStack();
                         break;
 

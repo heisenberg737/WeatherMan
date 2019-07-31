@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".currentWeatherByLatAndLon">
+    tools:context=".CurrentWeatherByLatAndLonFragment">
 
 
 
@@ -65,6 +65,14 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="17sp"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getLocation"
+        android:layout_centerHorizontal="true"
+        style="@android:style/Widget.Holo.ProgressBar"
+        android:visibility="gone"
+        android:id="@+id/current_weather_by_coord_pb"/>
 
 
     <ScrollView

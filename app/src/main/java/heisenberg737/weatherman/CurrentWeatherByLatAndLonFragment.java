@@ -2,10 +2,13 @@ package heisenberg737.weatherman;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,16 +40,20 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class currentWeatherByLatAndLon extends Fragment implements View.OnClickListener {
+public class CurrentWeatherByLatAndLonFragment extends Fragment implements View.OnClickListener {
 
     String url, lati, longi;
     TextView latitude, longitude, timezone, weather, temperature, pressure, humidity, wind_speed, cname;
     EditText lat, lon;
     Button show_weather, getLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
-    int LocationPermissioncode=1;
+    int LocationPermissioncode=1,progressStatus=0;
+    ProgressBar progressBar;
+    Handler handler=new Handler();
+    Context context;
+    SharedPreferences sharedPreferences;
 
-    public currentWeatherByLatAndLon() {
+    public CurrentWeatherByLatAndLonFragment() {
         // Required empty public constructor
     }
 
@@ -68,6 +76,11 @@ public class currentWeatherByLatAndLon extends Fragment implements View.OnClickL
         temperature = view.findViewById(R.id.temperature_lat_lon);
         cname = view.findViewById(R.id.cname_lat_lon);
         show_weather = view.findViewById(R.id.show_weather_lat_lon);
+
+        context=getContext();
+
+        progressBar=view.findViewById(R.id.current_weather_by_coord_pb);
+
         show_weather.setOnClickListener(this);
         getLocation.setOnClickListener(this);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -82,10 +95,41 @@ public class currentWeatherByLatAndLon extends Fragment implements View.OnClickL
             lati = lat.getText().toString();
             longi = lon.getText().toString();
             if (TextUtils.isEmpty(lati)) {
-                lat.setError("Enter a valid laltitude");
+                lat.setError("Enter a valid latitude");
             } else if (TextUtils.isEmpty(longi)) {
                 lon.setError("Enter a valid longitude");
             } else {
+
+                progressBar.setVisibility(View.VISIBLE);
+                progressStatus=0;
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while(progressStatus<100)
+                            progressStatus+=1;
+
+                        try {
+                            Thread.sleep(30);
+
+                        } catch (InterruptedException e) {
+
+                            e.printStackTrace();
+                        }
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressBar.setProgress(progressStatus);
+
+                                if(progressStatus==100)
+                                    progressBar.setVisibility(View.GONE);
+
+
+                            }
+                        });
+                    }
+                }).start();
+
                 ShowWeather(lati, longi);
             }
         }
@@ -101,6 +145,44 @@ public class currentWeatherByLatAndLon extends Fragment implements View.OnClickL
                         else {
                             String lati = String.valueOf(location.getLatitude());
                             String longi = String.valueOf(location.getLongitude());
+
+                            sharedPreferences=context.getSharedPreferences("Location",Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putString("Latitude",lati);
+                            editor.putString("Longitude",longi);
+                            editor.apply();
+
+
+                            progressBar.setVisibility(View.VISIBLE);
+                            progressStatus=0;
+
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    while(progressStatus<100)
+                                        progressStatus+=1;
+
+                                    try {
+                                        Thread.sleep(20);
+
+                                    } catch (InterruptedException e) {
+
+                                        e.printStackTrace();
+                                    }
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressBar.setProgress(progressStatus);
+
+                                            if(progressStatus==100)
+                                                progressBar.setVisibility(View.GONE);
+
+
+                                        }
+                                    });
+                                }
+                            }).start();
+
                             ShowWeather(lati, longi);
                         }
 
@@ -110,6 +192,7 @@ public class currentWeatherByLatAndLon extends Fragment implements View.OnClickL
             } else {
                 requestLocationPermission();
             }
+
         }
 
     }

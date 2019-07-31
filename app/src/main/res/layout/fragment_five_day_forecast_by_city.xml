@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fiveDayForecastByCity">
+    tools:context=".FiveDayForecastByCityFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -144,6 +144,16 @@
             android:textColor="@android:color/background_dark"
             android:id="@+id/five_day_forecast_longitude"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true"
+        style="@android:style/Widget.Holo.ProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/five_day_forecast_coord_lon"
+        android:id="@+id/five_day_forecast_by_city_pb"/>
 
     <HorizontalScrollView
         android:layout_width="match_parent"

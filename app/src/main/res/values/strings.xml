@@ -2,7 +2,7 @@
     <string name="app_name">WeatherMan</string>
     <string name="action_settings">Action Settings</string>
 
-    <string name="intro_para">Welcome to the Weather Man App! Your most trustworthy Weather App! This app provides a one stop shop to all our weather related queries along with data on environmental conditions. New features like Agro Map will be added as the app keeps developing. Enjoy using your app! To begin, swipe from left or press the icon on the top left corner of the screen to bring up the different pages in this app. </string>
+    <string name="intro_para">Welcome to the Weather Man App! Your most trustworthy Weather App! This app provides a one stop shop to all your weather related queries along with data on environmental conditions. New features like Agro Map will be added as the app keeps developing. Enjoy using your app! To begin, swipe from left or press the icon on the top left corner of the screen to bring up the different pages in this app. </string>
 
 
     <string name="ISO3166">Note: When entering the city name, make sure the country in which the city is located is entered as in ISO 3166 codes and the first letter of the city name is capitalised. Refer<a href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes"> HERE</a> to know the ISO 3166 code for your country.</string>

@@ -3,6 +3,7 @@ package heisenberg737.weatherman;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,7 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AirPollution extends Fragment implements View.OnClickListener {
+public class AirPollutionFragment extends Fragment implements View.OnClickListener {
 
     RecyclerView recyclerView;
     Button CO,SO2,NO2,O3;
@@ -41,11 +43,14 @@ public class AirPollution extends Fragment implements View.OnClickListener {
     RecyclerView.LayoutManager layoutManager;
     String gas,longi,lati,date;
     AirPollutionValuesAdapter adapter;
+    Handler handler=new Handler();
+    ProgressBar progressBar;
+    int progressStatus;
 
     ArrayList<AirPollutionValues> arrayList=new ArrayList<>();
 
 
-    public AirPollution() {
+    public AirPollutionFragment() {
         // Required empty public constructor
     }
 
@@ -68,6 +73,7 @@ public class AirPollution extends Fragment implements View.OnClickListener {
         time=view.findViewById(R.id.air_pollution_time);
         gasName=view.findViewById(R.id.selectedGas);
 
+        progressBar=view.findViewById(R.id.air_pollution_pb);
 
         getLatitude=view.findViewById(R.id.air_pollution_lat_entry);
         getLongitude=view.findViewById(R.id.air_pollution_lon_entry);
@@ -99,23 +105,48 @@ public class AirPollution extends Fragment implements View.OnClickListener {
         if(v.getId()==R.id.co_level)
         {
             gas="co";
-            getData(gas,lati,longi,date);
         }
-        else if(v.getId()==R.id.o3_level)
-        {
-            gas="o3";
-            getData(gas,lati,longi,date);
+        else if(v.getId()==R.id.o3_level) {
+            gas = "o3";
         }
         else if(v.getId()==R.id.so2_level)
         {
             gas="so2";
-            getData(gas,lati,longi,date);
         }
         else if(v.getId()==R.id.no2_level)
         {
             gas="no2";
-            getData(gas,lati,longi,date);
         }
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressStatus=0;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(progressStatus<100)
+                    progressStatus+=1;
+
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        progressBar.setProgress(progressStatus);
+
+                        if(progressStatus==100)
+                            progressBar.setVisibility(View.GONE);
+                    }
+                });
+            }
+        }).start();
+
+        getData(gas,lati,longi,date);
 
     }
     public void getData(String gas,String lati,String longi,String date)
@@ -155,7 +186,8 @@ public class AirPollution extends Fragment implements View.OnClickListener {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(),"Something went wrong..",Toast.LENGTH_SHORT);
+                if(getContext()==null)
+                Toast.makeText(getContext(),"Something went wrong..",Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });

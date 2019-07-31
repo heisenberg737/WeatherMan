@@ -1,62 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FiveDayForecastByCoordFragment">
+    tools:context=".FiveDayForecastNotificationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:orientation="horizontal"
-        android:id="@+id/five_day_forecast_coord_head">
+        android:id="@+id/five_day_forecast_notification_head">
+        <include
+            layout="@layout/toolbar_layout"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/five_day_forecast_coord_head"
-        android:id="@+id/five_day_forecast_by_coord_entry"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Latititde"
-            android:id="@+id/five_day_forecast_by_coord_latitude_entry"
-            android:layout_marginStart="5dp"
-            android:inputType="numberDecimal|numberSigned"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="5dp"
-            android:hint="Longitude"
-            android:id="@+id/five_day_forecast_by_coord_longitude_entry"
-            android:inputType="numberDecimal|numberSigned"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Show"
-            android:background="@android:color/holo_orange_dark"
-            android:textColor="@android:color/white"
-            android:id="@+id/five_day_forecast_by_coord_show"
-            android:layout_marginStart="5dp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_dark"
-        android:id="@+id/getCoordinates"
-        android:text="Get Location"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/five_day_forecast_by_coord_entry"/>
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,15 +22,15 @@
         android:indeterminate="true"
         style="@android:style/Widget.Holo.ProgressBar"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/five_day_forecast_by_coord_lon"
-        android:id="@+id/five_day_forecast_by_coord_pb"/>
+        android:layout_below="@id/five_day_forecast_notification_head"
+        android:id="@+id/five_day_forecast_notification_pb"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/five_day_forecast_by_coord_city"
+        android:id="@+id/five_day_forecast_notification_city"
         android:orientation="horizontal"
-        android:layout_below="@id/getCoordinates"
+        android:layout_below="@id/five_day_forecast_notification_head"
         android:layout_marginTop="10dp">
         <TextView
             android:layout_width="0dp"
@@ -89,15 +47,15 @@
             android:textSize="20sp"
             android:layout_marginStart="5dp"
             android:textColor="@android:color/background_dark"
-            android:id="@+id/five_day_forecast_by_coord_city_name"/>
+            android:id="@+id/five_day_forecast_notification_city_name"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/five_day_forecast_by_coord_city"
-        android:id="@+id/five_day_forecast_by_coord_country">
+        android:layout_below="@id/five_day_forecast_notification_city"
+        android:id="@+id/five_day_forecast_notification_country">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -113,15 +71,15 @@
             android:textSize="20sp"
             android:layout_marginStart="5dp"
             android:textColor="@android:color/background_dark"
-            android:id="@+id/five_day_forecast_by_coord_country_name"/>
+            android:id="@+id/five_day_forecast_notification_country_name"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/five_day_forecast_by_coord_country"
-        android:id="@+id/five_day_forecast_by_coord_lat">
+        android:layout_below="@id/five_day_forecast_notification_country"
+        android:id="@+id/five_day_forecast_notification_lat">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -137,15 +95,15 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textColor="@android:color/background_dark"
-            android:id="@+id/five_day_forecast_by_coord_latitude"/>
+            android:id="@+id/five_day_forecast_notification_latitude"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/five_day_forecast_by_coord_lat"
-        android:id="@+id/five_day_forecast_by_coord_lon">
+        android:layout_below="@id/five_day_forecast_notification_lat"
+        android:id="@+id/five_day_forecast_notification_lon">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -161,14 +119,14 @@
             android:textSize="20sp"
             android:layout_marginStart="5dp"
             android:textColor="@android:color/background_dark"
-            android:id="@+id/five_day_forecast_by_coord_longitude"/>
+            android:id="@+id/five_day_forecast_notification_longitude"/>
     </LinearLayout>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_below="@id/five_day_forecast_by_coord_lon">
+        android:layout_below="@id/five_day_forecast_notification_lon">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -229,7 +187,7 @@
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/five_day_forecast_by_coord_list">
+                android:id="@+id/five_day_forecast_notification_list">
             </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>

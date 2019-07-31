@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UVIndex">
+    tools:context=".UVIndexFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,6 +83,16 @@
             android:id="@+id/uv_index_date_iso"/>
     </LinearLayout>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true"
+        style="@android:style/Widget.Holo.ProgressBar"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/uv_index_pb"
+        android:layout_below="@+id/uv_index_dat"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Latitude"
+            android:inputType="numberSigned|numberDecimal"
             android:id="@+id/uv_index_lati"
             android:textSize="27sp" />
         <EditText
@@ -134,6 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Longitude"
+            android:inputType="numberSigned|numberDecimal"
             android:id="@+id/uv_index_longi"
             android:textSize="27sp" />
     </LinearLayout>

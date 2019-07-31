@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AirPollution">
+    tools:context=".AirPollutionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,6 +109,16 @@
             android:layout_weight="1"
             android:id="@+id/air_pollution_longitude"/>
     </LinearLayout>
+    
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.Holo.ProgressBar"
+        android:layout_below="@id/air_pollution_loc_lon"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:id="@+id/air_pollution_pb"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -14,13 +14,13 @@ import android.widget.Button;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fiveDayForecast extends Fragment implements View.OnClickListener {
+public class FiveDayForecastFragment extends Fragment implements View.OnClickListener {
 
     Button byCity,byCoordinates;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
-    public fiveDayForecast() {
+    public FiveDayForecastFragment() {
         // Required empty public constructor
     }
 
@@ -48,11 +48,11 @@ public class fiveDayForecast extends Fragment implements View.OnClickListener {
 
         if(v.getId()==R.id.five_day_forecast_by_city)
         {
-            fragmentTransaction.replace(R.id.main_content,new fiveDayForecastByCity(),null).commit();
+            fragmentTransaction.replace(R.id.main_content,new FiveDayForecastByCityFragment(),null).addToBackStack(null).commit();
         }
         else if(v.getId()==R.id.five_day_forecast_by_coordinates)
         {
-            fragmentTransaction.replace(R.id.main_content,new fiveDayForecastByCoord(),null).commit();
+            fragmentTransaction.replace(R.id.main_content,new FiveDayForecastByCoordFragment(),null).addToBackStack(null).commit();
         }
 
     }

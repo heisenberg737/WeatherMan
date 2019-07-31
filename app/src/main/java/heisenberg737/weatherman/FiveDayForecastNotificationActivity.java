@@ -1,17 +1,18 @@
 package heisenberg737.weatherman;
 
-
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,60 +25,82 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+public class FiveDayForecastNotificationActivity extends AppCompatActivity {
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class fiveDayForecastByCoord extends Fragment implements View.OnClickListener {
-
-    EditText lati,longi;
-    Button showForecast,getCoordinates;
     TextView cityName,countryName,latitude,longitude;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    ArrayList<fiveDayForecastClass> arrayList=new ArrayList<>();
-    fiveDayForecastAdapter adapter;
+    ArrayList<FiveDayForecastClass> arrayList=new ArrayList<>();
+    FiveDayForecastAdapter adapter;
     String url,coordLat,coordLon,temp,press,hum,desc,windspeed,datetime;
-
-
-
-    public fiveDayForecastByCoord() {
-        // Required empty public constructor
-    }
+    ProgressBar progressBar;
+    int progressStatus=0;
+    Handler handler=new Handler();
+    Toolbar toolbar;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_five_day_forecast_by_coord, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_five_day_forecast_notification);
 
-        lati=view.findViewById(R.id.five_day_forecast_by_coord_latitude_entry);
-        longi=view.findViewById(R.id.five_day_forecast_by_coord_longitude_entry);
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Forecast");
 
-        cityName=view.findViewById(R.id.five_day_forecast_by_coord_city_name);
-        countryName=view.findViewById(R.id.five_day_forecast_by_coord_country_name);
-        longitude=view.findViewById(R.id.five_day_forecast_by_coord_longitude);
-        latitude=view.findViewById(R.id.five_day_forecast_by_coord_latitude);
+        cityName=findViewById(R.id.five_day_forecast_notification_city_name);
+        countryName=findViewById(R.id.five_day_forecast_notification_country_name);
+        latitude=findViewById(R.id.five_day_forecast_notification_latitude);
+        longitude=findViewById(R.id.five_day_forecast_notification_longitude);
 
-        recyclerView=view.findViewById(R.id.five_day_forecast_by_coord_list);
-        layoutManager=new LinearLayoutManager(getContext());
+        progressBar=findViewById(R.id.five_day_forecast_notification_pb);
+
+        recyclerView=findViewById(R.id.five_day_forecast_notification_list);
+        layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        adapter=new FiveDayForecastAdapter(arrayList);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("Location", Context.MODE_PRIVATE);
+        coordLat=sharedPreferences.getString("Latitude","10.77");
+        coordLon=sharedPreferences.getString("Longitude","78.82");
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressStatus=0;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(progressStatus<100)
+                    progressStatus+=1;
+
+                try {
+                    Thread.sleep(20);
+
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        progressBar.setProgress(progressStatus);
+
+                        if(progressStatus==100)
+                            progressBar.setVisibility(View.GONE);
+                    }
+                });
+            }
+        }).start();
+
+        Forecast(coordLat,coordLon);
 
 
-        showForecast=view.findViewById(R.id.five_day_forecast_by_coord_show);
-        showForecast.setOnClickListener(this);
-        getCoordinates=view.findViewById(R.id.getCoordinates);
-        getCoordinates.setOnClickListener(this);
-
-
-
-        return view;
     }
 
-    public void Forecast(String coordLat,String coordLon)
-    {
+    public void Forecast(String coordLat, String coordLon)
+    {   arrayList.clear();
 
         url="http://api.openweathermap.org/data/2.5/forecast?lat="+coordLat+"&lon="+coordLon+"&appid=157f04f54cb3229c013c8b608c9adf57";
 
@@ -110,11 +133,13 @@ public class fiveDayForecastByCoord extends Fragment implements View.OnClickList
                         jsonObject1=jsonArray1.getJSONObject(0);
                         desc=jsonObject1.getString("description");
 
-                        fiveDayForecastClass forecast=new fiveDayForecastClass(temp,press,hum,desc,windspeed,datetime);
+                        FiveDayForecastClass forecast=new FiveDayForecastClass(temp,press,hum,desc,windspeed,datetime);
 
                         arrayList.add(forecast);
 
+
                     }
+                    adapter.swapData(arrayList);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -126,31 +151,16 @@ public class fiveDayForecastByCoord extends Fragment implements View.OnClickList
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getContext(),"Something went wrong...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Something went wrong...",Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
 
             }
         });
-        MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
-        adapter=new fiveDayForecastAdapter(arrayList);
-        recyclerView.setAdapter(adapter);
 
-    }
 
-    @Override
-    public void onClick(View v) {
-
-        if(v.getId()==R.id.five_day_forecast_by_coord_show)
-        {
-            coordLon=longi.getText().toString();
-            coordLat=lati.getText().toString();
-            Forecast(coordLat,coordLon);
-        }
-        else if(v.getId()==R.id.getCoordinates)
-        {
-            Toast.makeText(getContext(),"hi",Toast.LENGTH_SHORT).show();
-        }
 
     }
+
 }

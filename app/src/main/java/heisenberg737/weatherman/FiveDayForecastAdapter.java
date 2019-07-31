@@ -9,11 +9,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class fiveDayForecastAdapter extends RecyclerView.Adapter<fiveDayForecastAdapter.fiveDayForecastViewHolder> {
+public class FiveDayForecastAdapter extends RecyclerView.Adapter<FiveDayForecastAdapter.fiveDayForecastViewHolder> {
 
-    ArrayList<fiveDayForecastClass> arrayList=new ArrayList<>();
+    ArrayList<FiveDayForecastClass> arrayList=new ArrayList<>();
 
-    public fiveDayForecastAdapter(ArrayList<fiveDayForecastClass> arrayList)
+    public FiveDayForecastAdapter(ArrayList<FiveDayForecastClass> arrayList)
     {
         this.arrayList=arrayList;
     }
@@ -43,7 +43,7 @@ public class fiveDayForecastAdapter extends RecyclerView.Adapter<fiveDayForecast
         return arrayList.size();
     }
 
-    public void swapData(ArrayList<fiveDayForecastClass> newList)
+    public void swapData(ArrayList<FiveDayForecastClass> newList)
     {
         arrayList=newList;
         notifyDataSetChanged();
