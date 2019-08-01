@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class FiveDayForecastNotificationActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         adapter=new FiveDayForecastAdapter(arrayList);
+        recyclerView.setAdapter(adapter);
 
         SharedPreferences sharedPreferences=getSharedPreferences("Location", Context.MODE_PRIVATE);
         coordLat=sharedPreferences.getString("Latitude","10.77");
@@ -110,6 +112,7 @@ public class FiveDayForecastNotificationActivity extends AppCompatActivity {
 
 
                 try {
+
                     JSONObject jsonObject=response.getJSONObject("city");
                     cityName.setText(jsonObject.getString("name"));
                     JSONObject object=jsonObject.getJSONObject("coord");
@@ -140,6 +143,8 @@ public class FiveDayForecastNotificationActivity extends AppCompatActivity {
 
                     }
                     adapter.swapData(arrayList);
+                    Log.d("ArrayList",arrayList.size()+"");
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

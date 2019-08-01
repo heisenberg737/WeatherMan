@@ -18,11 +18,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class ForecastReciever extends BroadcastReceiver {
 
-    String url,coordLat,coordLon,description,dt_txt,hour="";
+    String url,coordLat,coordLon,description,dt_txt,hour="",desc;
     int hourOfDay;
     SharedPreferences sharedPreferences;
 
@@ -48,15 +51,20 @@ public class ForecastReciever extends BroadcastReceiver {
         coordLat=sharedPreferences.getString("Latitude","10.77");
         coordLon=sharedPreferences.getString("Longitude","78.82");
 
+        DateFormat dateFormat=DateFormat.getTimeInstance();
+        dateFormat.setTimeZone(TimeZone.getTimeZone("utc"));
+        String gmtTime=dateFormat.format(new Date());
+        Log.d("Date",gmtTime);
+
         url="http://api.openweathermap.org/data/2.5/forecast?lat="+coordLat+"&lon="+coordLon+"&appid=157f04f54cb3229c013c8b608c9adf57";
-        Log.d("Coordinates","lat="+coordLat+" lon="+coordLon);
+
         JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 try {
                     JSONArray jsonArray=response.getJSONArray("list");
-                    for(int i=0;i<jsonArray.length();i++)
+                    for(int i=0;i<1;i++)
                     {
                         JSONObject jsonObject=jsonArray.getJSONObject(i);
                         JSONObject jsonObject1;
@@ -64,18 +72,18 @@ public class ForecastReciever extends BroadcastReceiver {
                         hour=hour+dt_txt.charAt(11)+dt_txt.charAt(12);
 
 
-                        if (hourOfDay <= Integer.parseInt(hour))
-                        {
-                            JSONArray jsonArray1=jsonObject.getJSONArray("weather");
-                            jsonObject1=jsonArray1.getJSONObject(0);
-                            description=jsonObject1.getString("description");
-                            break;
-                        }
-                        Log.d("Hour",""+description);
+
+                        JSONArray jsonArray1=jsonObject.getJSONArray("weather");
+                        jsonObject1=jsonArray1.getJSONObject(0);
+                        description=jsonObject1.getString("description");
+
+                        desc=description;
+
 
                     }
 
                 } catch (JSONException e) {
+
                     e.printStackTrace();
                 }
 
@@ -89,7 +97,9 @@ public class ForecastReciever extends BroadcastReceiver {
         });
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
-        builder.setContentText("The weather is : "+description+". Tap to get the full forecast");
+        Log.d("Weather desc",desc);
+
+        builder.setContentText("The weather is : "+desc+". Tap to get the full forecast");
         builder.setAutoCancel(true);
         builder.setContentIntent(pendingIntent);
         builder.setSmallIcon(R.drawable.ic_notification_icon);

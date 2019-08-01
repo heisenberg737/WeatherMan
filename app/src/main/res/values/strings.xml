@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">WeatherMan</string>
-    <string name="action_settings">Action Settings</string>
 
     <string name="intro_para">Welcome to the Weather Man App! Your most trustworthy Weather App! This app provides a one stop shop to all your weather related queries along with data on environmental conditions. New features like Agro Map will be added as the app keeps developing. Enjoy using your app! To begin, swipe from left or press the icon on the top left corner of the screen to bring up the different pages in this app. </string>
 
 
     <string name="ISO3166">Note: When entering the city name, make sure the country in which the city is located is entered as in ISO 3166 codes and the first letter of the city name is capitalised. Refer<a href="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes"> HERE</a> to know the ISO 3166 code for your country.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="SolarPowerfact">This place seems to be receiving good amount of sunlight for the next five days. This can be used to set up a possible Solar Energy plant and generate useful energy.</string>
+
+    <string name="Rain">Good Rain can be expected. Rain water harvesting should come in handy. Flights could be rescheduled. Consider taking cabs for short distance travel. Click the icon below to go to install Ola or Uber. Save water, Save Life!</string>
+
+    <string name="wind">Wind speed recorded in the next five days, is more than the usual cut-in speed(3.5 m/s) of a wind turbine. Possible wind farm?</string>
 
 </resources>

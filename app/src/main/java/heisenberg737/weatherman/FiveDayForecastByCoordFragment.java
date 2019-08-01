@@ -46,17 +46,18 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
 
     EditText lati,longi;
     Button showForecast,getCoordinates;
-    TextView cityName,countryName,latitude,longitude;
+    TextView cityName,countryName,latitude,longitude,conclusion;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     ArrayList<FiveDayForecastClass> arrayList=new ArrayList<>();
     FiveDayForecastAdapter adapter;
     String url,coordLat,coordLon,temp,press,hum,desc,windspeed,datetime;
     FusedLocationProviderClient fusedLocationProviderClient;
-    int LOCATION_PERMISSION_CODE=1;
+    int LOCATION_PERMISSION_CODE=1,rain_counter=0;
     ProgressBar progressBar;
     int progressStatus=0;
     Handler handler=new Handler();
+    float avg_temp=0,avg_windspeed=0;
 
 
 
@@ -78,6 +79,7 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
         countryName=view.findViewById(R.id.five_day_forecast_by_coord_country_name);
         longitude=view.findViewById(R.id.five_day_forecast_by_coord_longitude);
         latitude=view.findViewById(R.id.five_day_forecast_by_coord_latitude);
+        conclusion=view.findViewById(R.id.five_day_forecast_by_coord_fact);
 
         progressBar=view.findViewById(R.id.five_day_forecast_by_coord_pb);
 
@@ -265,14 +267,27 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
                         jsonObject=jsonArray.getJSONObject(i);
                         JSONObject jsonObject1=jsonObject.getJSONObject("main");
                         temp=jsonObject1.getString("temp");
+
+                        avg_temp=avg_temp+Float.parseFloat(temp);
+                        avg_temp=avg_temp/40;
+
                         press=jsonObject1.getString("pressure");
                         hum=jsonObject1.getString("humidity");
                         jsonObject1=jsonObject.getJSONObject("wind");
                         windspeed=jsonObject1.getString("speed");
+
+                        avg_windspeed=avg_windspeed+Float.parseFloat(windspeed);
+                        avg_windspeed=avg_windspeed/40;
+
                         datetime=jsonObject.getString("dt_txt");
                         JSONArray jsonArray1=jsonObject.getJSONArray("weather");
                         jsonObject1=jsonArray1.getJSONObject(0);
                         desc=jsonObject1.getString("description");
+
+                        if (desc.contains("rain"))
+                        {
+                            ++rain_counter;
+                        }
 
                         FiveDayForecastClass forecast=new FiveDayForecastClass(temp,press,hum,desc,windspeed,datetime);
 
@@ -298,9 +313,28 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
             }
         });
         MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+        setFact();
 
+    }
 
-
+    public void setFact()
+    {
+        if(avg_temp>288&&avg_temp<308)
+        {
+            conclusion.setText(R.string.SolarPowerfact);
+        }
+        else if(avg_temp>308)
+        {
+            conclusion.setText("Very hot weather conditions. Solar cells in use may get damaged. Cautioned usage is advised.");
+        }
+        else if(rain_counter>7)
+        {
+            conclusion.setText(R.string.Rain);
+        }
+        else if(avg_windspeed>3.5)
+        {
+            conclusion.setText(R.string.wind);
+        }
 
     }
 
