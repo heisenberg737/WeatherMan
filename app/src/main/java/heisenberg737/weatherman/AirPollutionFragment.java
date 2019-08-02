@@ -163,10 +163,16 @@ public class AirPollutionFragment extends Fragment implements View.OnClickListen
                     longitude.setText(jsonObject.getString("longitude"));
                     time.setText(response.getString("time"));
                     JSONArray jsonArray=response.getJSONArray("data");
-                    for(int i=0;i<jsonArray.length();i++) {
+                    if(jsonArray.length()==0)
+                    {
+                        Toast.makeText(getContext(),"No Data Found. Please search using a different location or date or gas.",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                      for(int i=0;i<jsonArray.length();i++) {
                         JSONObject jsonObject1=jsonArray.getJSONObject(i);
                          AirPollutionValues pollutionValues=new AirPollutionValues(jsonObject1.getString("precision"),jsonObject1.getString("pressure"),jsonObject1.getString("value"));
                          arrayList.add(pollutionValues);
+                      }
                     }
 
 //                    else

@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Latititde"
+            android:backgroundTint="@drawable/edit_text_design"
             android:id="@+id/five_day_forecast_by_coord_latitude_entry"
             android:layout_marginStart="5dp"
             android:inputType="numberDecimal|numberSigned"/>
@@ -36,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="5dp"
+            android:backgroundTint="@drawable/edit_text_design"
             android:hint="Longitude"
             android:id="@+id/five_day_forecast_by_coord_longitude_entry"
             android:inputType="numberDecimal|numberSigned"/>
@@ -44,19 +46,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Show"
-            android:background="@android:color/holo_orange_dark"
+            android:elevation="5dp"
+            android:background="@drawable/button_design"
             android:textColor="@android:color/white"
             android:id="@+id/five_day_forecast_by_coord_show"
             android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:textStyle="bold"/>
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:id="@+id/getCoordinates"
-        android:text="Get Location"
+        android:elevation="5dp"
+        android:text="Get At My Location"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
@@ -247,6 +254,20 @@
         android:id="@+id/five_day_forecast_by_coord_fact"
         android:textSize="15sp"
         android:textColor="@android:color/background_dark" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/five_day_forecast_by_coord_fact"
+            android:textSize="15sp"
+            android:background="@drawable/button_design"
+            android:text="See Weather Map"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textStyle="bold"
+            android:id="@+id/showWeatherMap"
+            android:elevation="5dp"/>
     </RelativeLayout>
 
 

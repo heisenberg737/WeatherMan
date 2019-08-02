@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/uv_index_lat"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/fill_Lat_Lon">
         <TextView
             android:layout_width="0dp"
@@ -40,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/uv_index_lat"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:id="@+id/uv_index_lon">
         <TextView
@@ -63,6 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/uv_index_lon"
         android:id="@+id/uv_index_dat">
         <TextView
@@ -97,6 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="5dp"
         android:id="@+id/uv_index_val"
         android:layout_below="@id/uv_index_dat">
         <TextView
@@ -123,7 +127,10 @@
         android:layout_below="@id/uv_index_val"
         android:text="Show"
         android:textSize="17sp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
         android:textColor="@android:color/white"
         android:textStyle="bold"/>
     <LinearLayout
@@ -137,6 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Latitude"
+            android:backgroundTint="@drawable/edit_text_design"
             android:inputType="numberSigned|numberDecimal"
             android:id="@+id/uv_index_lati"
             android:textSize="27sp" />
@@ -147,6 +155,7 @@
             android:hint="Longitude"
             android:inputType="numberSigned|numberDecimal"
             android:id="@+id/uv_index_longi"
+            android:backgroundTint="@drawable/edit_text_design"
             android:textSize="27sp" />
     </LinearLayout>
 
@@ -157,9 +166,11 @@
         android:textStyle="bold"
         android:layout_below="@id/show_uv_index"
         android:layout_marginTop="20dp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
         android:textColor="@android:color/white"
-        android:text="Get Location"
+        android:text="Get At My Location"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:id="@+id/uv_index_get_location"/>
 
 </RelativeLayout>

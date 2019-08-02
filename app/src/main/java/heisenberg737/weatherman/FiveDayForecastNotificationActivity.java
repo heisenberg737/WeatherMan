@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class FiveDayForecastNotificationActivity extends AppCompatActivity {
     int progressStatus=0;
     Handler handler=new Handler();
     Toolbar toolbar;
+    Button seeWeatherMap;
 
 
     @Override
@@ -55,6 +57,8 @@ public class FiveDayForecastNotificationActivity extends AppCompatActivity {
         longitude=findViewById(R.id.five_day_forecast_notification_longitude);
 
         progressBar=findViewById(R.id.five_day_forecast_notification_pb);
+
+
 
         recyclerView=findViewById(R.id.five_day_forecast_notification_list);
         layoutManager=new LinearLayoutManager(this);
@@ -143,7 +147,7 @@ public class FiveDayForecastNotificationActivity extends AppCompatActivity {
 
                     }
                     adapter.swapData(arrayList);
-                    Log.d("ArrayList",arrayList.size()+"");
+
 
 
                 } catch (JSONException e) {

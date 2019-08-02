@@ -16,24 +16,30 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:text="By City Name"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
+        android:elevation="5dp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:textSize="30sp"
         android:layout_below="@id/five_head"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/five_day_forecast_by_city"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:text="By Coordinates"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:elevation="5dp"
+        android:layout_marginEnd="10dp"
         android:id="@+id/five_day_forecast_by_coordinates"
         android:textSize="30sp"
         android:layout_below="@id/five_day_forecast_by_city"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="60dp"/>
 
 
 

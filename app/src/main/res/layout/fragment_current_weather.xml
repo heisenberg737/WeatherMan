@@ -15,11 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:id="@+id/by_city_name"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_below="@+id/current_weather_head"
         android:layout_marginTop="20dp"
         android:text="By City Name"
+        android:elevation="5dp"
         android:textSize="30sp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
         android:textColor="@android:color/white"
         android:textStyle="bold"/>
 
@@ -31,7 +34,10 @@
         android:layout_marginTop="50dp"
         android:text="By Latitude and Longitude"
         android:textSize="30sp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:elevation="5dp"
         android:textColor="@android:color/white"
         android:textStyle="bold"/>
 

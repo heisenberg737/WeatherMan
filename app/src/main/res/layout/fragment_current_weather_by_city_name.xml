@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/city_name"
             android:hint="Type a city name"
+            android:backgroundTint="@drawable/edit_text_design"
             android:textSize="17sp"
             android:inputType="text"
             android:layout_marginTop="10dp"/>
@@ -63,9 +64,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Show"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@drawable/edit_text_design"
+        android:layout_marginEnd="10dp"
         android:id="@+id/show_weather"
+        android:elevation="5dp"
         android:layout_below="@+id/city_and_country"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/button_design"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:textSize="17sp"/>

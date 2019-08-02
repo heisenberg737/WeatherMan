@@ -19,6 +19,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="15sp"
         android:linksClickable="true"
+        android:textStyle="bold"
         android:layout_below="@id/five_day_forecast_head"
         android:id="@+id/five_day_forecast_note"/>
 
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="City"
+            android:backgroundTint="@drawable/edit_text_design"
             android:inputType="text"
             android:id="@+id/five_day_forecast_entry_city"/>
         <EditText
@@ -40,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Country"
+            android:backgroundTint="@drawable/edit_text_design"
             android:inputType="text"
             android:id="@+id/five_day_forecast_entry_country"/>
         <Button
@@ -47,7 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Show"
-            android:background="@android:color/holo_orange_dark"
+            android:layout_marginStart="10dp"
+            android:elevation="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_design"
             android:textColor="@android:color/white"
             android:id="@+id/five_day_forecast_show"
             android:textStyle="bold"/>

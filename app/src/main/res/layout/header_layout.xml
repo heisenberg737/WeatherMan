@@ -3,15 +3,19 @@
     android:layout_width="match_parent" android:layout_height="192dp">
 
     <TextView
+        android:id="@+id/wm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_design"
+        android:fontFamily="serif-monospace"
         android:text="WM"
-        android:id="@+id/wm"
-        android:textSize="75sp"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
         android:textColorHighlight="@android:color/holo_orange_dark"
-        android:layout_centerInParent="true"/>
+        android:textSize="75sp"
+        android:padding="10dp"
+        android:textStyle="bold" />
 
 
 

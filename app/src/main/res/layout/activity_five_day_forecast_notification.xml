@@ -126,6 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:id="@+id/five_day_forecast_horizontal"
         android:layout_below="@id/five_day_forecast_notification_lon">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -193,6 +194,20 @@
         </LinearLayout>
 
     </HorizontalScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/five_day_forecast_horizontal"
+        android:layout_margin="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/button_design"
+        android:textColor="@android:color/white"
+        android:text="See Weather Map"
+        android:textStyle="bold"
+        android:elevation="5dp"/>
 
 
 

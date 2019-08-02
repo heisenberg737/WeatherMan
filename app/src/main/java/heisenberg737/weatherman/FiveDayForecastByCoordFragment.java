@@ -3,6 +3,7 @@ package heisenberg737.weatherman;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -45,7 +46,7 @@ import java.util.ArrayList;
 public class FiveDayForecastByCoordFragment extends Fragment implements View.OnClickListener {
 
     EditText lati,longi;
-    Button showForecast,getCoordinates;
+    Button showForecast,getCoordinates,showWeatherMap;
     TextView cityName,countryName,latitude,longitude,conclusion;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -95,6 +96,8 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
         showForecast.setOnClickListener(this);
         getCoordinates=view.findViewById(R.id.getCoordinates);
         getCoordinates.setOnClickListener(this);
+        showWeatherMap=view.findViewById(R.id.showWeatherMap);
+        showWeatherMap.setOnClickListener(this);
 
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(getActivity());
 
@@ -198,6 +201,13 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
             } else {
                 requestLocationPermission();
             }
+        }
+        else if(v.getId()==R.id.showWeatherMap)
+        {
+            Intent intent=new Intent(getContext(),WeatherMapsActivity.class);
+            intent.putExtra("Lat",coordLat);
+            intent.putExtra("Lon",coordLon);
+            startActivity(intent);
         }
 
     }
