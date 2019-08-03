@@ -8,9 +8,10 @@
 
     <string name="SolarPowerfact">This place seems to be receiving good amount of sunlight for the next five days. This can be used to set up a possible Solar Energy plant and generate useful energy.</string>
 
-    <string name="Rain">Good Rain can be expected. Rain water harvesting should come in handy. Flights could be rescheduled. Consider taking cabs for short distance travel. Click the icon below to go to install Ola or Uber. Save water, Save Life!</string>
+    <string name="Rain">Good Rain can be expected. Rain water harvesting should come in handy. Flights could be rescheduled. Consider taking cabs for short distance travel. Save water, Save Life!</string>
 
     <string name="wind">Wind speed recorded in the next five days, is more than the usual cut-in speed(3.5 m/s) of a wind turbine. Possible wind farm?</string>
     <string name="title_activity_weather_maps">Map</string>
+
 
 </resources>

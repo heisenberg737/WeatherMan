@@ -4,9 +4,11 @@ package heisenberg737.weatherman;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -20,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,10 +82,12 @@ public class CurrentWeatherByLatAndLonFragment extends Fragment implements View.
 
         context=getContext();
 
+
         progressBar=view.findViewById(R.id.current_weather_by_coord_pb);
 
         show_weather.setOnClickListener(this);
         getLocation.setOnClickListener(this);
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
         return view;
@@ -194,6 +199,7 @@ public class CurrentWeatherByLatAndLonFragment extends Fragment implements View.
             }
 
         }
+
 
     }
 

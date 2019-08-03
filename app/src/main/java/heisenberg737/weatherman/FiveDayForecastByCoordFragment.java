@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,7 +47,7 @@ import java.util.ArrayList;
 public class FiveDayForecastByCoordFragment extends Fragment implements View.OnClickListener {
 
     EditText lati,longi;
-    Button showForecast,getCoordinates,showWeatherMap;
+    Button showForecast,getCoordinates;
     TextView cityName,countryName,latitude,longitude,conclusion;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -96,8 +97,9 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
         showForecast.setOnClickListener(this);
         getCoordinates=view.findViewById(R.id.getCoordinates);
         getCoordinates.setOnClickListener(this);
-        showWeatherMap=view.findViewById(R.id.showWeatherMap);
-        showWeatherMap.setOnClickListener(this);
+
+
+
 
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(getActivity());
 
@@ -202,13 +204,7 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
                 requestLocationPermission();
             }
         }
-        else if(v.getId()==R.id.showWeatherMap)
-        {
-            Intent intent=new Intent(getContext(),WeatherMapsActivity.class);
-            intent.putExtra("Lat",coordLat);
-            intent.putExtra("Lon",coordLon);
-            startActivity(intent);
-        }
+
 
     }
 
@@ -340,6 +336,9 @@ public class FiveDayForecastByCoordFragment extends Fragment implements View.OnC
         else if(rain_counter>7)
         {
             conclusion.setText(R.string.Rain);
+
+
+
         }
         else if(avg_windspeed>3.5)
         {

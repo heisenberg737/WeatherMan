@@ -16,7 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
+
 
 import java.util.Calendar;
 
@@ -24,27 +24,9 @@ public class MainActivity extends AppCompatActivity  {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    boolean doubleBacktoExitPressedOnce=false;
 
     FragmentManager fragmentManager,fragmentManager1;
 
-    @Override
-    public void onBackPressed() {
-        if(doubleBacktoExitPressedOnce){
-            super.onBackPressed();
-        }
-
-        this.doubleBacktoExitPressedOnce=true;
-        Toast.makeText(this,"Press Back Again to Exit!",Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBacktoExitPressedOnce=false;
-            }
-        },2000);
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +55,8 @@ public class MainActivity extends AppCompatActivity  {
         fragmentTransaction1.replace(R.id.main_content,new IntroFragment(),null).addToBackStack(null).commit();
 
         Calendar calendar=Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,15);
-        calendar.set(Calendar.MINUTE,53);
+        calendar.set(Calendar.HOUR_OF_DAY,8);
+        calendar.set(Calendar.MINUTE,0);
         calendar.set(Calendar.SECOND,0);
 
         Intent intent=new Intent(getApplicationContext(),ForecastReciever.class);
@@ -82,7 +64,7 @@ public class MainActivity extends AppCompatActivity  {
         PendingIntent pendingIntent=PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_FIFTEEN_MINUTES,pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -121,6 +103,9 @@ public class MainActivity extends AppCompatActivity  {
                         fragment=new FiveDayForecastFragment();
                         getSupportFragmentManager().popBackStack();
                         break;
+                    case R.id.see_weather_map:
+                        Intent intent1=new Intent(getApplicationContext(),WeatherMapsActivity.class);
+                        startActivity(intent1);
 
                 }
                 fragmentTransaction.replace(R.id.main_content,fragment,null).commit();

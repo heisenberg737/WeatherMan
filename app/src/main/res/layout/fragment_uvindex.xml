@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Latitude"
-            android:backgroundTint="@drawable/edit_text_design"
+            android:layout_marginStart="5dp"
             android:inputType="numberSigned|numberDecimal"
             android:id="@+id/uv_index_lati"
             android:textSize="27sp" />
@@ -153,9 +153,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Longitude"
+            android:layout_marginStart="5dp"
             android:inputType="numberSigned|numberDecimal"
             android:id="@+id/uv_index_longi"
-            android:backgroundTint="@drawable/edit_text_design"
             android:textSize="27sp" />
     </LinearLayout>
 

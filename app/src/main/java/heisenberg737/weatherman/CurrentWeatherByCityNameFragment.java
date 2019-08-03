@@ -1,6 +1,8 @@
 package heisenberg737.weatherman;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +56,9 @@ public class CurrentWeatherByCityNameFragment extends Fragment {
         note.setMovementMethod(LinkMovementMethod.getInstance());
 
         progressBar=view.findViewById(R.id.current_weather_by_city_pb);
+
+
+
 
         city_name=view.findViewById(R.id.city_name);
         country_name=view.findViewById(R.id.country_name);
@@ -113,6 +119,7 @@ public class CurrentWeatherByCityNameFragment extends Fragment {
         });
 
 
+
         return view;
     }
 
@@ -140,6 +147,7 @@ public class CurrentWeatherByCityNameFragment extends Fragment {
                     jsonArray=response.getJSONArray("weather");
                     jsonObject=jsonArray.getJSONObject(0);
                     weather.setText(jsonObject.getString("description"));
+
 
 
                 } catch (JSONException e) {

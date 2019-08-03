@@ -10,9 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WM"
+        android:textStyle="bold"
         android:id="@+id/wm"
         android:textSize="75sp"
+        android:background="@drawable/button_design"
         android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:fontFamily="serif-monospace"
         android:layout_centerInParent="true"/>
 
     <TextView
@@ -22,6 +27,9 @@
         android:textStyle="bold"
         android:textSize="17sp"
         android:layout_below="@id/wm"
+        android:background="@drawable/button_design"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:layout_centerHorizontal="true"/>
 

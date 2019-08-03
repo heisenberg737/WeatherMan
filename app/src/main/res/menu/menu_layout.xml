@@ -13,6 +13,9 @@
         <item
             android:id="@+id/five_day_forecast"
             android:title="5 Days/3 Hour Forecast"/>
+        <item
+            android:id="@+id/see_weather_map"
+            android:title="See Weather Map"/>
     </group>
 
 </menu>

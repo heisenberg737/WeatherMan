@@ -104,19 +104,9 @@ public class WeatherMapsActivity extends FragmentActivity implements OnMapReadyC
         mMap = googleMap;
 
         // Add a marker in NITT and move the camera
-        Intent intent=getIntent();
-        lat=intent.getStringExtra("Lat");
-        lon=intent.getStringExtra("Lon");
-        if(lat==null&&lon==null)
-        {
-            lat="10.77"; lon="78.82";
-        }
 
-        double lati,longi;
-        lati=Double.parseDouble(lat);
-        longi=Double.parseDouble(lon);
 
-        LatLng NITT = new LatLng(lati, longi);
+        LatLng NITT = new LatLng(10.77, 78.82);
         mMap.addMarker(new MarkerOptions().position(NITT).title("Marker at your coordinates"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(NITT));
 //        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(createTileProvider()));

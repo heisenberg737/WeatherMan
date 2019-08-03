@@ -76,7 +76,7 @@ public class ForecastReciever extends BroadcastReceiver {
                         JSONArray jsonArray1=jsonObject.getJSONArray("weather");
                         jsonObject1=jsonArray1.getJSONObject(0);
                         description=jsonObject1.getString("description");
-                        builder.setContentText("The weather is : "+description+". Tap to get the full forecast");
+
 
 
 
@@ -98,7 +98,7 @@ public class ForecastReciever extends BroadcastReceiver {
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
 
-
+        builder.setContentText("The weather forecast is ready. Tap to get the full forecast");
         builder.setAutoCancel(true);
         builder.setContentIntent(pendingIntent);
         builder.setSmallIcon(R.drawable.ic_notification_icon);
